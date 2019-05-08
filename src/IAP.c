@@ -4,8 +4,8 @@
 
 struct __cmd_table 
 {
-		U32 cmd_code;
-		U32 param[4];
+	U32 cmd_code;
+  U32 param[4];
 };
 
 static struct __cmd_table cmd_table;
