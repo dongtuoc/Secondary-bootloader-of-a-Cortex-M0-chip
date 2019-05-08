@@ -26,12 +26,12 @@
 #define BOOT_WAITTIME_UPDATE        5                                   
 #define FLASHWRITE_OK               0  
 #define FLASHWRITE_ERROR            1   
-#define UPDATE_IDLE				          0
-#define UPDATE_OK             	 	  1        
-#define UPDATE_ERROR          	    2  
-#define UPDATE_NO 	           		  3  
-#define USERCODE_OK           	    0   
-#define USERCODE_ERROR       	      1 
+#define UPDATE_IDLE                 0
+#define UPDATE_OK                   1        
+#define UPDATE_ERROR                2  
+#define UPDATE_NO                   3  
+#define USERCODE_OK                 0   
+#define USERCODE_ERROR              1 
 
 extern U32 u32NextFlashWriteAddr;
 extern void vControlSwitch(unsigned int sp,unsigned int pc);
