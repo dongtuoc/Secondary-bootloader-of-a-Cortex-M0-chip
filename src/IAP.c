@@ -4,16 +4,16 @@
 
 struct __cmd_table 
 {
-	U32 cmd_code;
-	U32 param[4];
+		U32 cmd_code;
+		U32 param[4];
 };
 
 static struct __cmd_table cmd_table;
 
 struct __result_table 
 {
-	U32 ret_code;
-	U32 result[4];
+		U32 ret_code;
+		U32 result[4];
 };
 
 static struct __result_table result_table;
@@ -23,15 +23,15 @@ static const IAP iap_call = (IAP) IAP_ADDRESS;
 
 int iap_erase_sector(unsigned int sector_start, unsigned int sector_end) 
 {
-	cmd_table.cmd_code = ERASE_SECTOR;
-	cmd_table.param[0] = sector_start;
-	cmd_table.param[1] = sector_end;
+		cmd_table.cmd_code = ERASE_SECTOR;
+		cmd_table.param[0] = sector_start;
+		cmd_table.param[1] = sector_end;
 
-	__disable_irq();
-	iap_call(&cmd_table, &result_table);
-	__enable_irq();
+		__disable_irq();
+		iap_call(&cmd_table, &result_table);
+		__enable_irq();
 
-	return (int)result_table.ret_code;
+		return (int)result_table.ret_code;
 }
 
 int iap_erase_page(unsigned int page_start, unsigned int page_end)
