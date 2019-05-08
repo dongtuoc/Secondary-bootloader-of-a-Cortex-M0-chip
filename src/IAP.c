@@ -61,7 +61,6 @@ int iap_prepare_sector(unsigned int sector_start, unsigned int sector_end)
   return (int)result_table.ret_code;
 }
 
- ************************************************************************************/
 int iap_copy_ram_to_flash(void* ram_address, void* flash_address, unsigned int count) 
 {
   cmd_table.cmd_code = COPY_RAM_TO_FLASH;
