@@ -12,7 +12,7 @@
 #define VECTORTAB_WORD        	  (192) 
 #define PAGE_BYTE                 (64)
 #define SECT_BYTE                 (1024)
-#define APP_START_Flash         	(0x00000C00)            
+#define APP_START_Flash           (0x00000C00)            
 #define APP_END_Flash           	(0x00007BFF)          
 #define APP_START_RESET         	(APP_START_Flash + 4) 
 #define APP_START_RAM           	(0x100000C0)       
