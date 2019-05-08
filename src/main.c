@@ -27,24 +27,24 @@ void BODInit(void)
 void SysTick_Handler(void)
 {	
     timerTick();
-	static U8 timecount;
-	timecount++;
-	if ((timecount % 100) == 0)
-	{
-		timecount = 0;
-		LPC_GPIO->NOT[0] |=  (1<<21);
-	}
+    static U8 timecount;
+    timecount++;
+    if ((timecount % 100) == 0)
+    {
+        timecount = 0;
+        LPC_GPIO->NOT[0] |=  (1<<21);
+    }
 }
 
 void GPIOInit (void)
 {
     LPC_SYSCON->SYSAHBCLKCTRL |= ((1 << 6)|(1 << 7)|(1 << 14));         
-	LPC_GPIO->DIR[0] |=  ((1<<27) | (1<<21));                                     
+    LPC_GPIO->DIR[0] |=  ((1<<27) | (1<<21));                                     
 }
 
 void vScene_Init (void)
 {
-	UART_Init();                                                      
+    UART_Init();                                                      
     SysTick_Config(SystemCoreClock / SECOND_PER_TICK);
     GPIOInit();
 }
@@ -58,11 +58,11 @@ void SysTick_Reset (void)
 
 void vScene_Renew (void)
 {
-	SysTick_Reset();
+    SysTick_Reset();
     LPC_SYSCON->SYSAHBCLKCTRL &= ~(7 << 14);
     LPC_SYSCON->SYSAHBCLKCTRL &= ~(1 << 17);
-	LPC_SWM->PINASSIGN[0] |= ( 0xFF << 16 ); 
-	NVIC_DisableIRQ(WDT_IRQn);
+    LPC_SWM->PINASSIGN[0] |= ( 0xFF << 16 ); 
+    NVIC_DisableIRQ(WDT_IRQn);
 }
 
 int main (void)
