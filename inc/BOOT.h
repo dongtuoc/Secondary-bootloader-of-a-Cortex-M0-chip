@@ -22,7 +22,7 @@
 #define BOOT_FLAG_SECT			      (BOOT_FLAG_ADDR/SECT_BYTE)
 #define APP_START_SECTOR        	(APP_START_Flash/SECT_BYTE)        
 #define APP_END_SECTOR          	(31)                                    
-#define BOOT_DELAYTIME_C        		1                                    
+#define BOOT_DELAYTIME_C            1                                    
 #define BOOT_WAITTIME_UPDATE        5                                   
 #define FLASHWRITE_OK               0  
 #define FLASHWRITE_ERROR            1   
