@@ -194,7 +194,7 @@ U8 u8Xmodem1kClient(pFunPKTHAND pfunPktHandle, U16  u16ShortDly, U16 u8LongDly)
 
       if (ptHead->u8Index == 1)
       {
-        if	((puData->u8LongBuff[1020] != 0x5A) || (puData->u8LongBuff[1021]!= 0x43) ||
+        if ((puData->u8LongBuff[1020] != 0x5A) || (puData->u8LongBuff[1021]!= 0x43) ||
         (puData->u8LongBuff[1022] != 0x5A) || (puData->u8LongBuff[1023] != 0x43))
         {
           return UPDATE_NO;
