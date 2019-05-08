@@ -64,30 +64,29 @@ int iap_prepare_sector(unsigned int sector_start, unsigned int sector_end)
  ************************************************************************************/
 int iap_copy_ram_to_flash(void* ram_address, void* flash_address, unsigned int count) 
 {
-	cmd_table.cmd_code = COPY_RAM_TO_FLASH;
-	cmd_table.param[0] = (U32) flash_address;
-	cmd_table.param[1] = (U32) ram_address;
-	cmd_table.param[2] = count;
-	cmd_table.param[3] = SystemCoreClock / 1000;
+  cmd_table.cmd_code = COPY_RAM_TO_FLASH;
+  cmd_table.param[0] = (U32) flash_address;
+  cmd_table.param[1] = (U32) ram_address;
+  cmd_table.param[2] = count;
+  cmd_table.param[3] = SystemCoreClock / 1000;
 
-	__disable_irq();
-	iap_call(&cmd_table, &result_table);
-	__enable_irq();
+  __disable_irq();
+  iap_call(&cmd_table, &result_table);
+  __enable_irq();
 
-	return (int)result_table.ret_code;
+  return (int)result_table.ret_code;
 }
 
 int dataCompare (U32  dst, U32  src, U32  no)
 {  
-    cmd_table.cmd_code = COMPARE;
-    cmd_table.param[0] = dst;
-    cmd_table.param[1] = src;
-    cmd_table.param[2] = no;
-    
-    __disable_irq();
-    iap_call(&cmd_table, &result_table);
-    __enable_irq();
+  cmd_table.cmd_code = COMPARE;
+  cmd_table.param[0] = dst;
+  cmd_table.param[1] = src;
+  cmd_table.param[2] = no;
 
-    return (int)result_table.ret_code;
+  __disable_irq();
+  iap_call(&cmd_table, &result_table);
+  __enable_irq();
+
+  return (int)result_table.ret_code;
 }
- 
