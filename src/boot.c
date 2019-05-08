@@ -9,25 +9,24 @@ U32 NextFlashWriteAddr=0;
 
 U8 UpdateBootFlag()
 {
-	U8 ret_code=0;
-	
-	ret_code = iap_prepare_sector(BOOT_FLAG_SECT, BOOT_FLAG_SECT);
-	if (ret_code != CMD_SUCCESS) 
-		return ret_code;
-	
-  	ret_code = iap_erase_page(BOOT_FLAG_PAGE, BOOT_FLAG_PAGE);
-	if (ret_code != CMD_SUCCESS) 
-		return ret_code;
+    U8 ret_code=0;
 
-	return CMD_SUCCESS;
+    ret_code = iap_prepare_sector(BOOT_FLAG_SECT, BOOT_FLAG_SECT);
+    if (ret_code != CMD_SUCCESS) 
+        return ret_code;
+
+    ret_code = iap_erase_page(BOOT_FLAG_PAGE, BOOT_FLAG_PAGE);
+    if (ret_code != CMD_SUCCESS) 
+        return ret_code;
+    return CMD_SUCCESS;
 }
 
 static void vControlSwitch(unsigned int sp,unsigned int pc)
 {
-  asm("ldr   r0, [r0]");
-  asm("mov   sp, r0");
-  asm("ldr   r0, [r1]");
-  asm("bx    r0");
+    asm("ldr   r0, [r0]");
+    asm("mov   sp, r0");
+    asm("ldr   r0, [r1]");
+    asm("bx    r0");
 }
 
 static U8 ProgramFlash(U8 *pu8Data, U8 u16Len)
