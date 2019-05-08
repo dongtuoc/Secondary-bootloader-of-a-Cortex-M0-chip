@@ -4,16 +4,16 @@
 
 #define IAP_ADDRESS            0x1FFF1FF1
 
-#define PREPARE_SECTOR      		50
-#define COPY_RAM_TO_FLASH   	51
-#define ERASE_SECTOR        		52
-#define BLANK_CHECK_SECTOR  	53
-#define READ_PART_ID        		54
-#define READ_BOOT_CODE_REV  	55
-#define COMPARE             			56
-#define REINVOKE_ISP        		57
-#define READ_UID            			58
-#define ERASE_PAGE          			59
+#define PREPARE_SECTOR      50
+#define COPY_RAM_TO_FLASH   51
+#define ERASE_SECTOR        52
+#define BLANK_CHECK_SECTOR  53
+#define READ_PART_ID        54
+#define READ_BOOT_CODE_REV  55
+#define COMPARE             56
+#define REINVOKE_ISP        57
+#define READ_UID            58
+#define ERASE_PAGE          59
 
 
 typedef enum 
