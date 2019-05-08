@@ -27,37 +27,36 @@ void UART_Init (void)
 
 uint8_t UART_SendByte (uint8_t ucData)
 {
-	if((LPC_USART0->STAT & 0x04) != 0)                                    
-	{                                    
-        LPC_USART0->TXDATA = ucData;                                            
-        while ((LPC_USART0->STAT & 0x08) == 0);
-        return UART_SUCCESS;
-    }
+  if((LPC_USART0->STAT & 0x04) != 0)                                    
+  {                                    
+    LPC_USART0->TXDATA = ucData;                                            
+    while ((LPC_USART0->STAT & 0x08) == 0);
+    return UART_SUCCESS;
+  }
     return UART_NO_SPACE;
 }
 
 void UART_SendString (char *pucData, uint32_t uiLen)
 {	
-	while ( uiLen != 0 )
-    {
-        while (((LPC_USART0->STAT) & TXRDY) == 0);
-        LPC_USART0->TXDATA = *pucData;
-        while((LPC_USART0->STAT & TXIDLE)==0);
-
-        pucData++;
-        uiLen--;
-    }
+  while ( uiLen != 0 )
+  {
+    while (((LPC_USART0->STAT) & TXRDY) == 0);
+    LPC_USART0->TXDATA = *pucData;
     while((LPC_USART0->STAT & TXIDLE)==0);
-	return ;
+
+    pucData++;
+    uiLen--;
+  }
+  while((LPC_USART0->STAT & TXIDLE)==0);
+  return ;
 }
 
 uint8_t UART_RecvByte(uint8_t *ucData)
 {
-	if((LPC_USART0->STAT & 0x01) == 1)                               
-	{                                 
-        *ucData = LPC_USART0->RXDATA;
-        return UART_SUCCESS;
-		
-    }
-    return UART_NO_CHAR;
+  if((LPC_USART0->STAT & 0x01) == 1)                               
+  {                                 
+    *ucData = LPC_USART0->RXDATA;
+    return UART_SUCCESS;
+  }
+  return UART_NO_CHAR;
 }
