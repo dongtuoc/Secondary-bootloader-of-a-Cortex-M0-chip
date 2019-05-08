@@ -18,54 +18,54 @@
 
 void WatchDog_Initial(void) 
 {
-	/* Ê¹ÄÜ¿´ÃÅ¹·Ê±ÖÓÔ´ */
-	LPC_SYSCON->SYSAHBCLKCTRL |= WWDT;
+    /* ä½¿èƒ½çœ‹é—¨ç‹—æ—¶é’Ÿæº */
+    LPC_SYSCON->SYSAHBCLKCTRL |= WWDT;
 
-	/* ¼ì²â¿´ÃÅ¹·Òç³ö±êÖ¾ÊÇ·ñ±»ÖÃÎ» */
-	if (LPC_WWDT->MOD & (1<<WDTOF)) 
-	{
-		/* Í¨¹ýÐ´0À´Çå³ýWDTOF±êÖ¾ */
-		LPC_WWDT->MOD &= ~(1<<WDTOF);
-	}
+    /* æ£€æµ‹çœ‹é—¨ç‹—æº¢å‡ºæ ‡å¿—æ˜¯å¦è¢«ç½®ä½ */
+    if (LPC_WWDT->MOD & (1<<WDTOF)) 
+    {
+        /* é€šè¿‡å†™0æ¥æ¸…é™¤WDTOFæ ‡å¿— */
+        LPC_WWDT->MOD &= ~(1<<WDTOF);
+    }
 
-	/* ¿ªÆô¿´ÃÅ¹·Õñµ´Æ÷ */
-	LPC_SYSCON->PDRUNCFG &= ~(WDTOSC_PD);
-	
-	/* ÔÚSYSCONÖÐÅäÖÃ WDCLK ÆµÂÊ
-	*  DIVSEL--·ÖÆµÊý  FREQSEL:Ä£ÄâÊä³öÆµÂÊ ÅäÖÃWDTOSCCTRLÎªwdt_osc_clk 
-	*  ÅäÖÃWDTÊ±ÖÓ£ºdiv_sel  = 31 Ä£ÄâÊ±ÖÓ Freq  = 0.6 MHz£¬·ÖÆµÖµ DIV = 2 * div_sel + 2 = 64£¬
-    *  WDTÆµÂÊ  WDT_OSC = 0.6MHz / 64 = 9375 Hz£¬WDTÖÜÆÚ Twdt_osc = 1 / 9375 (s)
+    /* å¼€å¯çœ‹é—¨ç‹—æŒ¯è¡å™¨ */
+    LPC_SYSCON->PDRUNCFG &= ~(WDTOSC_PD);
+
+    /* åœ¨SYSCONä¸­é…ç½® WDCLK é¢‘çŽ‡
+    *  DIVSEL--åˆ†é¢‘æ•°  FREQSEL:æ¨¡æ‹Ÿè¾“å‡ºé¢‘çŽ‡ é…ç½®WDTOSCCTRLä¸ºwdt_osc_clk 
+    *  é…ç½®WDTæ—¶é’Ÿï¼šdiv_sel  = 31 æ¨¡æ‹Ÿæ—¶é’Ÿ Freq  = 0.6 MHzï¼Œåˆ†é¢‘å€¼ DIV = 2 * div_sel + 2 = 64ï¼Œ
+    *  WDTé¢‘çŽ‡  WDT_OSC = 0.6MHz / 64 = 9375 Hzï¼ŒWDTå‘¨æœŸ Twdt_osc = 1 / 9375 (s)
     */
-	LPC_SYSCON->WDTOSCCTRL = (1<<FREQSEL)|(31<<DIVSEL);
+    LPC_SYSCON->WDTOSCCTRL = (1<<FREQSEL)|(31<<DIVSEL);
 
     /*
-    * WDTÌáÐÑÎ¹¹·Ê±¼ä¼ÆËã£º
+    * WDTæé†’å–‚ç‹—æ—¶é—´è®¡ç®—ï¼š
     * T = ( WDT_TC - WDT_WARNINT ) * 4 * Twdt_osc
-    * Èç£¬ÏëÉèÖÃÎª2s£º
+    * å¦‚ï¼Œæƒ³è®¾ç½®ä¸º2sï¼š
     * 2 = ( TC * 4 ) / 9375  --> TC = 0x1250
     */
 
-	LPC_WWDT->WARNINT = 0x3FF;
-	LPC_WWDT->WINDOW = 0x1250;
-	LPC_WWDT->TC = 0x1250;      /*¿´ÃÅ¹·µÄ¶¨Ê±Ê±¼äTIMER = (TC*4)/(wdt_osc_clk)£¬ÕâÀïµÄ¶¨Ê±Ê±¼äÎª2s*/
-	LPC_WWDT->MOD = (0<<WDTOF)|(1<<WDEN)|(1<<WDRESET);
+    LPC_WWDT->WARNINT = 0x3FF;
+    LPC_WWDT->WINDOW = 0x1250;
+    LPC_WWDT->TC = 0x1250;      /*çœ‹é—¨ç‹—çš„å®šæ—¶æ—¶é—´TIMER = (TC*4)/(wdt_osc_clk)ï¼Œè¿™é‡Œçš„å®šæ—¶æ—¶é—´ä¸º2s*/
+    LPC_WWDT->MOD = (0<<WDTOF)|(1<<WDEN)|(1<<WDRESET);
 
-	/* Ê¹ÄÜWWDTÖÐ¶Ï */
-	//NVIC_EnableIRQ(WDT_IRQn);
+    /* ä½¿èƒ½WWDTä¸­æ–­ */
+    //NVIC_EnableIRQ(WDT_IRQn);
 
-	/* Î¹¹·Ê±Ðò */
-	LPC_WWDT->FEED = 0xAA;
-	LPC_WWDT->FEED = 0x55;
+    /* å–‚ç‹—æ—¶åº */
+    LPC_WWDT->FEED = 0xAA;
+    LPC_WWDT->FEED = 0x55;
 }
 
-/*¿´ÃÅ¹·¸´Î»¼ÆËã*/ 
+/*çœ‹é—¨ç‹—å¤ä½è®¡ç®—*/ 
 void wdt_feed(void)
 { 
     if( (LPC_WWDT->TV) <= (LPC_WWDT->WINDOW))
-	{
-		/* Î¹¹· */
-		LPC_WWDT->FEED = 0xAA;
-		LPC_WWDT->FEED = 0x55;
-	}
+    {
+        /* å–‚ç‹— */
+        LPC_WWDT->FEED = 0xAA;
+        LPC_WWDT->FEED = 0x55;
+    }
 }
 
