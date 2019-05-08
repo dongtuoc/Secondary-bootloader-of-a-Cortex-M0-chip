@@ -9,30 +9,30 @@
 #include "BOOT.h"
 
 #define SOH                         (0x01)                                
-#define STX                         (0x02)                                
-#define EOT                         (0x04)                                
-#define ACK                         (0x06)                                
-#define NAK                         (0x15)                               
-#define CAN                         (0x18)                                
-#define POLL                        (0x43)                                
+#define STX   (0x02)                                
+#define EOT   (0x04)                                
+#define ACK   (0x06)                                
+#define NAK   (0x15)                               
+#define CAN   (0x18)                                
+#define POLL  (0x43)                                
 
-#define STAT_IDLE_DATA             	0                              
-#define STAT_IDLE_C                 		1                               
-#define STAT_CONNECT                	2
-#define STAT_RECEIVE                	3                               
-#define STAT_HANDLE                 		4                                 
-#define STAT_ACK                    		5                              
-#define STAT_NAK                    		6                                
-#define STAT_CAN                    		7                              
-#define STAT_END                    		8                           
-#define STAT_TIMEOUT_C             	9                    
+#define STAT_IDLE_DATA    0                              
+#define STAT_IDLE_C       1                               
+#define STAT_CONNECT      2
+#define STAT_RECEIVE      3                               
+#define STAT_HANDLE       4                                 
+#define STAT_ACK          5                              
+#define STAT_NAK          6                                
+#define STAT_CAN          7                              
+#define STAT_END          8                           
+#define STAT_TIMEOUT_C    9                    
 
-#define LONGPKT_LEN                 1024             
-#define SHORTPKT_LEN                128                       
-#define PKT_HEAD_LEN                3                               
+#define LONGPKT_LEN       1024             
+#define SHORTPKT_LEN      128                       
+#define PKT_HEAD_LEN      3                               
 
-#define PKT_TIMEOUT_MS              100                    
-#define CHAR_TIMEOUT_MS             2                             
+#define PKT_TIMEOUT_MS    100                    
+#define CHAR_TIMEOUT_MS   2                             
 typedef union 
 {
     struct
