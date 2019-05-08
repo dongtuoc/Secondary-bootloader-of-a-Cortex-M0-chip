@@ -2,7 +2,7 @@
 #include "TICKTASK.h"
 
 typedef struct {
-    unsigned long       timerCnt[TICK_COUNT_NUM];
+    unsigned long   timerCnt[TICK_COUNT_NUM];
 }tTICKINFO;
 
 static tTICKINFO tTick;
@@ -19,10 +19,6 @@ void sysTimerClr(unsigned char number)
 
 void timerTick(void)
 {
-	tTick.timerCnt[0]++;
-	tTick.timerCnt[1]++;
+    tTick.timerCnt[0]++;
+    tTick.timerCnt[1]++;
 }
-
-/*********************************************************************************************************
-    end of file
-*********************************************************************************************************/
